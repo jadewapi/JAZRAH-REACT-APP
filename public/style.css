@@ -24,10 +24,13 @@ input {
 
 input {
   /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    to bottom,
+    transparent 1%,
+    rgba(57, 57, 57, 0.482)
+  );
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.3px);
-  -webkit-backdrop-filter: blur(4.3px);
   border: 1px solid rgba(255, 255, 255, 0.82);
   color: white;
 }
@@ -38,11 +41,11 @@ input::placeholder {
 
 body {
   font-family: "Poppins";
-  /* background: linear-gradient(-300deg, #878787, #232323);
+  /* background: linear-gradient(-300deg, #005187, #2b7600);
   background-size: 400% 400%;
   animation: gradient 10s ease infinite; */
   height: 100vh;
-  background-color: #4e4e4e;
+  background-color: black;
 }
 
 @keyframes gradient {
@@ -71,6 +74,7 @@ body {
   max-width: 1387px;
   min-width: 467px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .trademark {
@@ -79,11 +83,15 @@ body {
   font-size: 2rem;
   text-align: center;
   margin-bottom: 2rem; /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    to bottom,
+    transparent 1%,
+    rgba(57, 57, 57, 0.482)
+  );
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.3px);
-  -webkit-backdrop-filter: blur(4.3px);
-  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.82);
+  color: white;
 }
 
 nav {
@@ -93,11 +101,15 @@ nav {
   border-radius: 20px;
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    to bottom,
+    transparent 1%,
+    rgba(57, 57, 57, 0.482)
+  );
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.3px);
-  -webkit-backdrop-filter: blur(4.3px);
   border: 1px solid rgba(255, 255, 255, 0.82);
+  color: white;
 }
 
 nav > * {
@@ -124,6 +136,7 @@ nav > p {
   height: 70%;
   width: auto;
   animation: spin 7s linear infinite;
+  filter: contrast(2);
 }
 
 .logo > p {
@@ -143,11 +156,15 @@ main > section {
   border-radius: 20px;
   height: 59rem;
   /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    to bottom,
+    transparent 1%,
+    rgba(57, 57, 57, 0.482)
+  );
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.3px);
-  -webkit-backdrop-filter: blur(4.3px);
   border: 1px solid rgba(255, 255, 255, 0.82);
+  color: white;
 }
 
 main > section:first-child {
@@ -167,15 +184,19 @@ main > section:first-child {
   gap: 2rem;
   align-items: center;
   /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    to bottom,
+    transparent 1%,
+    rgba(57, 57, 57, 0.482)
+  );
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.3px);
-  -webkit-backdrop-filter: blur(4.3px);
   border: 1px solid rgba(255, 255, 255, 0.82);
+  color: white;
 }
 
 .specificMovieList > .imageContainer {
-  background-color: #ffffff;
+  text-align: center;
   height: 100%;
   min-width: 15%;
 }
@@ -204,17 +225,21 @@ main > section:first-child {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .clickedMovie {
   padding: 2rem 4rem;
   /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.14);
-  border-radius: 16px;
+  background: linear-gradient(
+    to bottom,
+    transparent 1%,
+    rgba(57, 57, 57, 0.482)
+  );
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.3px);
-  -webkit-backdrop-filter: blur(4.3px);
   border: 1px solid rgba(255, 255, 255, 0.82);
+  color: white;
   width: 95%;
   height: 90%;
   border-radius: 20px;
@@ -231,18 +256,27 @@ main > section:first-child {
 }
 
 .selectedMoviePoster {
-  width: 15%;
+  text-align: center;
+  width: 30%;
+  max-width: 30%;
   height: 100%;
-  background-color: white;
+  overflow: scroll;
+}
+
+.selectedMoviePoster > img {
+  height: 100%;
+  width: auto;
 }
 
 .selectedMovieMainInfo {
+  overflow: auto;
   height: 100%;
   width: 85%;
 }
 
 .selectedMovieMainInfo > p:first-child {
   font-size: 4rem;
+  white-space: nowrap;
 }
 
 .selectedMovieMainInfo > p:not(:first-child) {
@@ -260,8 +294,23 @@ main > section:first-child {
   display: flex;
   gap: 1rem;
   height: 30%;
+  align-items: center;
+}
+
+.starComponent > p {
+  width: 20%;
+  text-align: center;
+}
+
+.starComponent > div {
+  width: 60%;
+  display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.starComponent > p {
+  font-size: 2rem;
 }
 
 .misc {
@@ -312,12 +361,15 @@ main > section:first-child {
   padding: 1rem 3rem;
   height: 30%;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.14);
-  border-radius: 16px;
+  background: linear-gradient(
+    to bottom,
+    transparent 1%,
+    rgba(57, 57, 57, 0.482)
+  );
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.3px);
-  -webkit-backdrop-filter: blur(4.3px);
   border: 1px solid rgba(255, 255, 255, 0.82);
+  color: white;
   display: flex;
   gap: 2rem;
 }
@@ -345,7 +397,12 @@ main > section:first-child {
 
 @media (max-width: 1033px) {
   .specificMovieList > .imageContainer {
-    min-width: 30%;
+    max-width: 30%;
+  }
+  .specificMovieList > .imageContainer > img {
+    width: auto;
+    max-width: 100%;
+    height: 100%;
   }
 }
 
@@ -423,7 +480,7 @@ main > section:first-child {
 }
 
 .specificMovieList:hover {
-  background: linear-gradient(-300deg, #2aaae2, #f05826, #8bc53f);
+  background: linear-gradient(-300deg, #ff2e00, #9aff00);
   background-size: 400% 400%;
   animation: gradient 1s ease infinite;
 }
@@ -432,3 +489,24 @@ main > section:first-child {
   color: white;
   font-size: 2rem;
 }
+
+svg {
+  fill: white;
+  height: 8rem;
+  animation: spin 10s linear infinite;
+  filter: grayscale(100%);
+}
+
+/* This will affect the scrollbar track (the background) */
+::-webkit-scrollbar {
+  width: 5px; /* Adjust width of scrollbar */
+  height: 5px;
+}
+
+/* This will affect the scrollbar thumb (the moving part) */
+::-webkit-scrollbar-thumb {
+  background: #ffffff; /* Change thumb color */
+  border-radius: 20px; /* Make it rounder */
+}
+
+/* Change the color of the scrollbar thumb when you hover over it */
