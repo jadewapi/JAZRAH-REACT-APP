@@ -2,26 +2,53 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [listOfMovies, setListOfMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState("");
+  const [error, setError] = useState("");
+  const [query, setQuery] = useState("");
   return (
     <>
-      <Navbar listOfMovies={listOfMovies} setListOfMovies={setListOfMovies} />
+      <Navbar
+        listOfMovies={listOfMovies}
+        setListOfMovies={setListOfMovies}
+        setIsLoading={setIsLoading}
+        setError={setError}
+        query={query}
+        setQuery={setQuery}
+      />
       <Main>
-        <ListedMovies listOfMovies={listOfMovies} />
+        <ListedMovies
+          listOfMovies={listOfMovies}
+          isLoading={isLoading}
+          error={error}
+          query={query}
+        />
         <SpecificMovie />
       </Main>
     </>
   );
 }
-function ListedMovies({ listOfMovies }) {
+function ListedMovies({ listOfMovies, isLoading, error, query }) {
+  const [currentMovieSelected, setCurrentMovieSelected] = useState({});
+  function handleClickSpecificMovie(id) {}
   return (
     <section class="listedMovies">
-      <div class="specificMovieList">
-        <div class="imageContainer"></div>
-        <div class="specificMovieTitle">
-          <p>Inception</p>
-          <p>2010</p>
-        </div>
-      </div>
+      {query === "" && <p class="messageListMovie">Enter a movie</p>}
+      {error && query !== "" && <p class="messageListMovie">{error}</p>}
+      {isLoading && !error && <p class="messageListMovie">Loading...</p>}
+      {!isLoading &&
+        !error &&
+        listOfMovies.Search &&
+        listOfMovies?.Search.map((movieObj) => (
+          <div class="specificMovieList">
+            <div class="imageContainer">
+              <img src={movieObj.Poster} alt=""></img>
+            </div>
+            <div class="specificMovieTitle">
+              <p>{movieObj.Title}</p>
+              <p>{movieObj.Year}</p>
+            </div>
+          </div>
+        ))}
     </section>
   );
 }
@@ -30,25 +57,40 @@ function Main({ children }) {
   return <main>{children}</main>;
 }
 
-function Navbar({ listOfMovies, setListOfMovies }) {
-  const [query, setQuery] = useState("");
-  const [isLoading, setIsLoading] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+function Navbar({
+  listOfMovies,
+  setListOfMovies,
+  setIsLoading,
+  setError,
+  query,
+  setQuery,
+}) {
   const KEY = "57e0e46e";
-  useEffect(
-    function () {
-      async function request() {
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
-        );
-        const data = await res.json();
-        setListOfMovies(data);
-        console.log(data.Search);
+  useEffect(() => {
+    async function fetchData() {
+      if (query === "") {
+        setListOfMovies([]);
+        setIsLoading(false);
+      } else {
+        setIsLoading(true);
+        setError("");
+        try {
+          const res = await fetch(
+            `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+          );
+          if (!res.ok) throw new Error("Something went wrong...");
+          const data = await res.json();
+          if (data.Response === "False") throw new Error("No movie found");
+          setListOfMovies(data);
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setIsLoading(false);
+        }
       }
-      request();
-    },
-    [query]
-  );
+    }
+    fetchData();
+  }, [query]);
   return (
     <nav>
       <div class="logo">
@@ -58,19 +100,14 @@ function Navbar({ listOfMovies, setListOfMovies }) {
       <input
         type="text"
         placeholder="search a movie..."
+        value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : listOfMovies?.Search ? (
-        <p>
-          Found{" "}
-          {listOfMovies.Search.length > 1 ? listOfMovies.Search.length : "a"}{" "}
-          {listOfMovies.Search.length > 1 ? "movies" : "movie"}
-        </p>
-      ) : (
-        <p>No movie found</p>
-      )}
+      <p>
+        Found{" "}
+        {listOfMovies.Search?.length > 1 ? listOfMovies.Search?.length : "a"}{" "}
+        {listOfMovies.Search?.length > 1 ? "movies" : "movie"}
+      </p>
     </nav>
   );
 }
