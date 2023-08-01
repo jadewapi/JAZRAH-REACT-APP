@@ -1,14 +1,9 @@
+import { useState, useEffect } from "react";
+
 function App() {
   return (
     <>
-      <nav>
-        <div class="logo">
-          <img src="jazrah.png" alt="logo" />
-          <p>jazrah</p>
-        </div>
-        <input type="text" placeholder="search a movie..." />
-        <p>Found 10 results</p>
-      </nav>
+      <Navbar />
       <main>
         <section class="listedMovies">
           <div class="specificMovieList">
@@ -60,6 +55,31 @@ function App() {
         </section>
       </main>
     </>
+  );
+}
+
+function Navbar() {
+  const [listOfMovies, setListOfMovies] = useState([]);
+  const KEY = "57e0e46e";
+  useEffect(function () {
+    async function request() {
+      const res = await fetch(
+        `http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`
+      );
+      const data = await res.json();
+      console.log(data);
+    }
+    request();
+  }, []);
+  return (
+    <nav>
+      <div class="logo">
+        <img src="jazrah.png" alt="logo" />
+        <p>jazrah</p>
+      </div>
+      <input type="text" placeholder="search a movie..." />
+      <p>Found 10 results</p>
+    </nav>
   );
 }
 
