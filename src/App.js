@@ -1,25 +1,42 @@
 import { useState, useEffect } from "react";
 
 function App() {
+  const [listOfMovies, setListOfMovies] = useState([]);
   return (
     <>
-      <Navbar />
-      <main>
-        <ListedMovies />
+      <Navbar listOfMovies={listOfMovies} setListOfMovies={setListOfMovies} />
+      <Main>
+        <ListedMovies listOfMovies={listOfMovies} />
         <SpecificMovie />
-      </main>
+      </Main>
     </>
   );
 }
+function ListedMovies({ listOfMovies }) {
+  return (
+    <section class="listedMovies">
+      <div class="specificMovieList">
+        <div class="imageContainer"></div>
+        <div class="specificMovieTitle">
+          <p>Inception</p>
+          <p>2010</p>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-function Navbar() {
+function Main({ children }) {
+  return <main>{children}</main>;
+}
+
+function Navbar({ listOfMovies, setListOfMovies }) {
   const [query, setQuery] = useState("");
-  const [listOfMovies, setListOfMovies] = useState([]);
   const [isLoading, setIsLoading] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const KEY = "57e0e46e";
   useEffect(
     function () {
-      setIsLoading(true);
       async function request() {
         const res = await fetch(
           `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
@@ -27,7 +44,6 @@ function Navbar() {
         const data = await res.json();
         setListOfMovies(data);
         console.log(data.Search);
-        setIsLoading(false);
       }
       request();
     },
@@ -46,31 +62,16 @@ function Navbar() {
       />
       {isLoading ? (
         <p>Loading...</p>
+      ) : listOfMovies?.Search ? (
+        <p>
+          Found{" "}
+          {listOfMovies.Search.length > 1 ? listOfMovies.Search.length : "a"}{" "}
+          {listOfMovies.Search.length > 1 ? "movies" : "movie"}
+        </p>
       ) : (
-        <p>Found {listOfMovies.Search?.length} results</p>
+        <p>No movie found</p>
       )}
     </nav>
-  );
-}
-
-function ListedMovies() {
-  return (
-    <section class="listedMovies">
-      <div class="specificMovieList">
-        <div class="imageContainer"></div>
-        <div class="specificMovieTitle">
-          <p>Inception</p>
-          <p>2010</p>
-        </div>
-      </div>
-      <div class="specificMovieList">
-        <div class="imageContainer"></div>
-        <div class="specificMovieTitle">
-          <p>Inception</p>
-          <p>2010</p>
-        </div>
-      </div>
-    </section>
   );
 }
 
