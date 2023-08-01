@@ -357,6 +357,20 @@ main > section:first-child {
   .statsTop > p {
     font-size: 1rem;
   }
+  .logo > p {
+    display: none;
+  }
+  .logo {
+    width: 20%;
+  }
+  nav > input {
+    width: 50%;
+  }
+  nav > p {
+    width: 30%;
+    font-size: 1.5rem;
+    text-align: center;
+  }
 }
 
 @media (max-width: 752px) {
@@ -375,5 +389,14 @@ main > section:first-child {
 @media (max-width: 622px) {
   .starComponent {
     gap: 0.5rem;
+  }
+  nav > .logo {
+    display: none;
+  }
+  nav > input {
+    width: 60%;
+  }
+  nav > p {
+    width: 40%;
   }
 }
