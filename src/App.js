@@ -25,13 +25,23 @@ function App() {
           setCurrentMovieSelected={setCurrentMovieSelected}
           currentMovieSelected={currentMovieSelected}
         />
-        <SpecificMovie currentMovieSelected={currentMovieSelected} />
+        <SpecificMovie>
+          <ClickedMovie
+            currentMovieSelected={currentMovieSelected}
+            key={currentMovieSelected?.imdbID}
+          />
+        </SpecificMovie>
       </Main>
     </>
   );
 }
-function SpecificMovie({ currentMovieSelected }) {
-  const [rating, setRating] = useState(1);
+function SpecificMovie({ children }) {
+  return <>{children}</>;
+}
+
+function ClickedMovie({ currentMovieSelected }) {
+  const [rating, setRating] = useState(0);
+  const [hoveredRating, setHoveredRating] = useState(0);
   return (
     <section class="specificMovie">
       {currentMovieSelected && (
@@ -58,7 +68,16 @@ function SpecificMovie({ currentMovieSelected }) {
               <div className="svgContainer">
                 {Array.from({ length: 5 }, (_, index) => (
                   <svg
-                    onClick={() => setRating(index)}
+                    onClick={() => {
+                      if (rating === index + 1) {
+                        setRating(0);
+                        setHoveredRating(0);
+                      } else {
+                        setRating(index + 1);
+                      }
+                    }}
+                    onMouseEnter={() => setHoveredRating(index + 1)}
+                    onMouseLeave={() => setHoveredRating(0)}
                     key={`kjdsfjsdkf${index}9919`}
                     xmlns="http://www.w3.org/2000/svg"
                     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -66,7 +85,13 @@ function SpecificMovie({ currentMovieSelected }) {
                     viewBox="0 0 375 374.999991"
                     preserveAspectRatio="xMidYMid meet"
                     version="1.0"
-                    style={index <= rating ? { filter: "contrast(2)" } : {}}
+                    style={
+                      index < rating
+                        ? { filter: "contrast(2)" }
+                        : index < hoveredRating
+                        ? { filter: "contrast(2)" }
+                        : {}
+                    }
                   >
                     <path
                       fill="#ffffff"
@@ -94,11 +119,19 @@ function SpecificMovie({ currentMovieSelected }) {
                     />
                   </svg>
                 ))}
-                <p>{rating || ""}</p>
               </div>
-              <p></p>
+              <p>
+                {rating > 0 ? `Rated: ${rating}` : `Rated: ${hoveredRating}`}
+              </p>
             </div>
             <div class="misc">
+              {rating > 0 ? (
+                <div>
+                  <button>Add to list</button>
+                </div>
+              ) : (
+                ""
+              )}
               <p>{currentMovieSelected.Plot}</p>
               <p>starring {currentMovieSelected.Actors}</p>
               <p>directed by {currentMovieSelected.Director}</p>

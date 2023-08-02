@@ -321,7 +321,29 @@ main > section:first-child {
 }
 
 .misc > p:not(:first-child) {
-  margin-top: 4rem;
+  margin-top: 2rem;
+}
+
+.misc > div {
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.misc > div > button {
+  padding: 0 3rem;
+  border-radius: 20px;
+  background: linear-gradient(
+    to bottom,
+    transparent 1%,
+    rgba(57, 57, 57, 0.482)
+  );
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.3px);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  color: white;
 }
 
 .ratedMovies {
@@ -487,6 +509,12 @@ main > section:first-child {
   animation: gradient 1s ease infinite;
 }
 
+.misc > div > button:hover {
+  background: linear-gradient(-300deg, #ff2e00, #9aff00);
+  background-size: 400% 400%;
+  animation: gradient 1s ease infinite;
+}
+
 .messageListMovie {
   color: white;
   font-size: 2rem;
@@ -499,16 +527,12 @@ svg {
   filter: grayscale(100%);
 }
 
-/* This will affect the scrollbar track (the background) */
 ::-webkit-scrollbar {
-  width: 5px; /* Adjust width of scrollbar */
+  width: 5px;
   height: 5px;
 }
 
-/* This will affect the scrollbar thumb (the moving part) */
 ::-webkit-scrollbar-thumb {
-  background: #ffffff; /* Change thumb color */
-  border-radius: 20px; /* Make it rounder */
+  background: #ffffff;
+  border-radius: 20px;
 }
-
-/* Change the color of the scrollbar thumb when you hover over it */
