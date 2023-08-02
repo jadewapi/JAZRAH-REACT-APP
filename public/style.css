@@ -371,7 +371,7 @@ main > section:first-child {
   margin: 0 auto;
   font-size: 1rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: flex-start;
 }
 
@@ -409,7 +409,12 @@ main > section:first-child {
 .imgContainer {
   width: 10%;
   height: 100%;
-  background-color: rgb(255, 255, 255);
+}
+
+.imgContainer > img {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
 }
 
 .infoBottom {
@@ -421,6 +426,25 @@ main > section:first-child {
 .infoBottom > div {
   display: flex;
   gap: 2rem;
+}
+
+.specificBottomMovieNavigation {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+}
+
+.specificBottomMovieNavigation > svg {
+  fill: white;
+}
+
+@media (max-width: 1181px) {
+  .specificMovieTitle {
+    width: 70%;
+  }
+  .specificMovieTitle > p:first-child {
+    font-size: 1.5rem;
+  }
 }
 
 @media (max-width: 1033px) {
@@ -557,4 +581,14 @@ main > section:first-child {
   border-radius: 10px;
   padding: 0 1rem;
   color: white;
+}
+
+.specificBottomMovie:hover {
+  background: linear-gradient(-300deg, #ff2e00, #9aff00);
+  background-size: 400% 400%;
+  animation: gradient 7s ease infinite;
+}
+
+.pleaseSelectAMovie {
+  font-size: 3rem;
 }
