@@ -8,6 +8,7 @@ function App() {
   const [currentMovieSelected, setCurrentMovieSelected] = useState(null);
   return (
     <>
+      <p class="list">see movies you rated</p>
       <Navbar
         listOfMovies={listOfMovies}
         setListOfMovies={setListOfMovies}
@@ -26,17 +27,18 @@ function App() {
           currentMovieSelected={currentMovieSelected}
         />
         <SpecificMovie>
-          <ClickedMovie
+          {/* <ClickedMovie
             currentMovieSelected={currentMovieSelected}
             key={currentMovieSelected?.imdbID}
-          />
+          /> */}
+          <WatchedMovies />
         </SpecificMovie>
       </Main>
     </>
   );
 }
 function SpecificMovie({ children }) {
-  return <>{children}</>;
+  return <>{children} </>;
 }
 
 function ClickedMovie({ currentMovieSelected }) {
@@ -139,6 +141,68 @@ function ClickedMovie({ currentMovieSelected }) {
           </div>
         </div>
       )}
+    </section>
+  );
+}
+
+function WatchedMovies() {
+  return (
+    <section class="ratedMovies">
+      <div class="top">
+        <p>Movies you rated:</p>
+        <div class="statsTop">
+          <p>2 movies</p>
+          <p>8.3 stars avg</p>
+          <p>highest: 8.5</p>
+          <p>avg duration: 147 mins</p>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="specificBottomMovie">
+          <div class="imgContainer"></div>
+          <div class="infoBottom">
+            <p>Interception</p>
+            <div>
+              <p>8.8 stars</p>
+              <p>10 stars</p>
+              <p>148 min</p>
+            </div>
+          </div>
+        </div>
+        <div class="specificBottomMovie">
+          <div class="imgContainer"></div>
+          <div class="infoBottom">
+            <p>Interception</p>
+            <div>
+              <p>8.8 stars</p>
+              <p>10 stars</p>
+              <p>148 min</p>
+            </div>
+          </div>
+        </div>
+        <div class="specificBottomMovie">
+          <div class="imgContainer"></div>
+          <div class="infoBottom">
+            <p>Interception</p>
+            <div>
+              <p>8.8 stars</p>
+              <p>10 stars</p>
+              <p>148 min</p>
+            </div>
+          </div>
+        </div>
+        <div class="specificBottomMovie">
+          <div class="imgContainer"></div>
+          <div class="infoBottom">
+            <p>Interception</p>
+            <div>
+              <p>8.8 stars</p>
+              <p>10 stars</p>
+              <p>148 min</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

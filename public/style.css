@@ -8,6 +8,7 @@
 
 html {
   font-size: 62.5%;
+  position: relative;
 }
 
 button,
@@ -346,29 +347,32 @@ main > section:first-child {
   color: white;
 }
 
-.ratedMovies {
-  height: 100%;
-}
-
 .top {
   height: 20%;
-  text-align: center;
   font-size: 2rem;
   border-bottom: 2px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 1rem;
 }
 
 .top > p {
-  height: 30%;
+  height: 70%;
+  display: flex;
+  justify-self: center;
+  align-items: center;
 }
 
 .statsTop {
   width: 90%;
-  height: 70%;
+  height: 60%;
   margin: 0 auto;
   font-size: 1rem;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .statsTop > p {
@@ -480,11 +484,15 @@ main > section:first-child {
     flex-direction: column;
   }
   main > section:first-child {
+    max-height: 60rem;
     width: 100%;
     height: 60%;
   }
   main > section:nth-child(2) {
     width: 100%;
+  }
+  .list {
+    right: -100%;
   }
 }
 
@@ -520,7 +528,7 @@ main > section:first-child {
   font-size: 2rem;
 }
 
-svg {
+.svgContainer > svg {
   fill: white;
   height: 8rem;
   animation: spin 10s linear infinite;
@@ -535,4 +543,18 @@ svg {
 ::-webkit-scrollbar-thumb {
   background: #ffffff;
   border-radius: 20px;
+}
+
+.list {
+  position: absolute;
+  background: linear-gradient(-300deg, #ff2e00, #9aff00);
+  background-size: 400% 400%;
+  animation: gradient 7s ease infinite;
+  z-index: 9;
+  font-size: 2rem;
+  bottom: 0%;
+  right: 0%;
+  border-radius: 10px;
+  padding: 0 1rem;
+  color: white;
 }
