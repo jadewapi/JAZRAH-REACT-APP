@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.171);
+  user-select: none;
 }
 
 html {
@@ -97,7 +98,7 @@ body {
 nav {
   padding: 0 3rem;
   color: white;
-  height: 10rem;
+  height: 8rem;
   border-radius: 20px;
   display: flex;
   align-items: center;
@@ -117,7 +118,7 @@ nav > * {
 }
 
 nav > input {
-  height: 40%;
+  height: 60%;
   border-radius: 20px;
 }
 
@@ -269,13 +270,14 @@ main > section:first-child {
 }
 
 .selectedMovieMainInfo {
-  overflow: auto;
+  overflow: hidden;
   height: 100%;
   width: 85%;
 }
 
 .selectedMovieMainInfo > p:first-child {
-  font-size: 4rem;
+  overflow: auto;
+  font-size: 3rem;
   white-space: nowrap;
 }
 

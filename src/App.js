@@ -31,7 +31,7 @@ function App() {
   );
 }
 function SpecificMovie({ currentMovieSelected }) {
-  const [hoveredNumber, setHoveredNumber] = useState(-1);
+  const [rating, setRating] = useState(1);
   return (
     <section class="specificMovie">
       {currentMovieSelected && (
@@ -58,8 +58,7 @@ function SpecificMovie({ currentMovieSelected }) {
               <div className="svgContainer">
                 {Array.from({ length: 5 }, (_, index) => (
                   <svg
-                    onMouseEnter={() => setHoveredNumber(index)}
-                    onMouseLeave={() => setHoveredNumber(-1)}
+                    onClick={() => setRating(index)}
                     key={`kjdsfjsdkf${index}9919`}
                     xmlns="http://www.w3.org/2000/svg"
                     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -67,9 +66,7 @@ function SpecificMovie({ currentMovieSelected }) {
                     viewBox="0 0 375 374.999991"
                     preserveAspectRatio="xMidYMid meet"
                     version="1.0"
-                    style={
-                      index <= hoveredNumber ? { filter: "contrast(2)" } : {}
-                    }
+                    style={index <= rating ? { filter: "contrast(2)" } : {}}
                   >
                     <path
                       fill="#ffffff"
@@ -97,15 +94,9 @@ function SpecificMovie({ currentMovieSelected }) {
                     />
                   </svg>
                 ))}
+                <p>{rating || ""}</p>
               </div>
-              <p>
-                {hoveredNumber < 0 ? "?" : hoveredNumber + 1}{" "}
-                {hoveredNumber === 1
-                  ? "star"
-                  : hoveredNumber > 1
-                  ? "stars"
-                  : ""}
-              </p>
+              <p></p>
             </div>
             <div class="misc">
               <p>{currentMovieSelected.Plot}</p>
